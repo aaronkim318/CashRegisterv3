@@ -191,7 +191,7 @@ namespace CashRegister
 
         private void button4_Click(object sender, EventArgs e)
         {
-            caliRollText.Text = "";
+            caliRollText.Text = "";//
             sCaliRollText.Text = "";
             avoCucRollText.Text = "";
 
