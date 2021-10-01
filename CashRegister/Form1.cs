@@ -1,4 +1,9 @@
-﻿using System;
+﻿//author: Aaron Kim
+//purpose: to make a cash register to calculate the total, and print a receipt of the order
+//sept,29/2021
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,18 +20,18 @@ namespace CashRegister
             
     public partial class SushiDojo : Form
     {
-            
+        //declare a number value into variable    
         double Cprice = 4.75;
         double Sprice = 5.25;
         double ACprice = 4.25;
 
         double tax = 0.13;
         double taxofitem;
-        
+        //declare a global variable to store information
         double cali;
         double scali;
         double avocuc;
-
+        //declare variable for the subtotal of each price 
         double subtotalC;
         double subtotalS;
         double subtotalAC;
@@ -36,7 +41,7 @@ namespace CashRegister
 
         double tendered;
         double change;
-
+        //global variable for the sound player
         SoundPlayer alertplayer = new SoundPlayer(Properties.Resources.printer);
         SoundPlayer chaching = new SoundPlayer(Properties.Resources.chaching);
         
@@ -49,30 +54,32 @@ namespace CashRegister
            
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            //tries this code 
             try {
+                //makes the textbox into a numbered value text box
                 cali = Convert.ToInt32(caliRollText.Text);
                 scali = Convert.ToInt32(sCaliRollText.Text);
                 avocuc = Convert.ToInt32(avoCucRollText.Text);
-
+                //finds the price of each item
                 subtotalC = cali * Cprice;
                 subtotalS = scali * Sprice;
                 subtotalAC = avocuc * ACprice;
                 subtotal = subtotalAC + subtotalC + subtotalS;
-
+                //finds the tax of the item
                 taxofitem = subtotal * tax;
-
+                //finds the final price
                 total = taxofitem + subtotal;
-
+                //writes subtotal, tax, total value on program
                 subtotalPriceLabel.Text = $"{subtotal.ToString("C")}";
                 taxPriceLabel.Text = $"{taxofitem.ToString("C")}";
                 totalPriceLabel.Text = $"{total.ToString("C")}";
             }
-           
+           //if code doesn't work in the try section, catch and release the value below
             catch
             {
                 subtotalPriceLabel.Text = "Input Error, Try Again";
             }
+            //makes the label and buttons visible
             subTotalLabel.Visible = true;
             taxLabel.Visible = true;
             totalLabel.Visible = true;
@@ -99,11 +106,11 @@ namespace CashRegister
         private void button3_Click(object sender, EventArgs e)
         {
             printedReceiptLabel.Visible = true;
-
+            //turns sound player on
             alertplayer.Play();
-
+            //prints on program Sushi Dojo
             printedReceiptLabel.Text = $"\n\n                          The Sushi Dojo";
-            
+            //refreshes and waits for 1 second
             Refresh();
             Thread.Sleep(1000);
             
